@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FlavorFind | Global Recipe Finder</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+
+        <a href="#" class="logo">🍽️ FlavorFind</a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#recipes">Explore Recipes</a>
+            <a href="#favorites">❤️ Favorites</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+
+        <p class="subtitle">DISCOVER FOOD FROM AROUND THE WORLD</p>
+
+        <h1>
+            Find Your Next
+            <span>Favorite Recipe!</span>
+        </h1>
+
+        <p class="hero-description">
+            Explore delicious dishes from India, China, Italy,
+            Korea, Japan, Mexico, and many more countries.
+        </p>
+
+        <form id="searchForm" class="search-box">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search biryani, pizza, noodles..."
+                autocomplete="off"
+            >
+
+            <button type="submit">🔍 Search</button>
+
+        </form>
+
+        <div class="popular-searches">
+            <span>Popular:</span>
+
+            <button type="button" data-search="biryani">Biryani</button>
+            <button type="button" data-search="pizza">Pizza</button>
+            <button type="button" data-search="noodles">Noodles</button>
+            <button type="button" data-search="chicken">Chicken</button>
+        </div>
+
+    </section>
+
+
+    <!-- Cuisine Categories -->
+    <section class="category-section">
+
+        <h2>Explore World Cuisines 🌍</h2>
+
+        <p>Choose a cuisine to discover its popular dishes.</p>
+
+        <div class="category-buttons" id="cuisineButtons">
+
+            <button type="button" class="category-btn active"
+                data-cuisine="All">
+                🌎 All Cuisines
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="Indian">
+                🇮🇳 Indian
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="Chinese">
+                🇨🇳 Chinese
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="Italian">
+                🇮🇹 Italian
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="Korean">
+                🇰🇷 Korean
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="Japanese">
+                🇯🇵 Japanese
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="Mexican">
+                🇲🇽 Mexican
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="Thai">
+                🇹🇭 Thai
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="American">
+                🇺🇸 American
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="French">
+                🇫🇷 French
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="Arabic">
+                🇸🇦 Arabic
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="All"
+                data-category="vegetarian">
+                🥗 Vegetarian
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="All"
+                data-category="non-vegetarian">
+                🍗 Non-Vegetarian
+            </button>
+
+            <button type="button" class="category-btn"
+                data-cuisine="All"
+                data-category="dessert">
+                🍰 Desserts
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- Recipe Collection -->
+    <main class="recipes-section" id="recipes">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="subtitle">YOUR NEXT MEAL STARTS HERE</p>
+
+                <h2 id="sectionTitle">Explore All Recipes</h2>
+            </div>
+
+            <p id="recipeCount">Loading recipes...</p>
+
+        </div>
+
+
+        <!-- Recipe cards will appear here through JavaScript -->
+        <div id="recipeContainer" class="recipe-grid">
+
+        </div>
+
+
+        <!-- No Results Message -->
+        <div id="emptyMessage" class="empty-message" hidden>
+
+            <div class="empty-icon">🍽️</div>
+
+            <h3>No recipes found!</h3>
+
+            <p>Try another food name or select a different cuisine.</p>
+
+            <button type="button" id="resetButton">
+                Show All Recipes
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- Favorites Section -->
+    <section class="favorites-section" id="favorites">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="subtitle">YOUR PERSONAL COLLECTION</p>
+
+                <h2>❤️ Your Favorite Recipes</h2>
+            </div>
+
+            <p id="favoriteCount">0 saved</p>
+
+        </div>
+
+        <div id="favoriteContainer" class="recipe-grid">
+
+        </div>
+
+    </section>
+
+
+    <!-- Recipe Details Popup -->
+    <div id="recipeModal" class="modal" hidden>
+
+        <div class="modal-content">
+
+            <button
+                type="button"
+                id="closeModal"
+                class="close-button"
+                aria-label="Close recipe">
+                &times;
+            </button>
+
+            <img id="modalImage" src="" alt="Recipe food">
+
+            <div class="modal-body">
+
+                <p id="modalCuisine" class="subtitle"></p>
+
+                <h2 id="modalTitle"></h2>
+
+                <p id="modalDescription"></p>
+
+                <div class="recipe-meta">
+
+                    <span id="modalTime">⏱️ Cooking time</span>
+
+                    <span id="modalCategory">🍽️ Category</span>
+
+                </div>
+
+                <h3>🧺 Ingredients</h3>
+
+                <ul id="modalIngredients"></ul>
+
+                <h3>👨‍🍳 Cooking Instructions</h3>
+
+                <ol id="modalInstructions"></ol>
+
+                <button
+                    type="button"
+                    id="modalFavoriteButton"
+                    class="primary-button">
+                    ❤️ Add to Favorites
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <a href="#home" class="logo">🍽️ FlavorFind</a>
+
+        <p>Discover flavors. Explore cultures. Enjoy cooking.</p>
+
+        <p class="copyright">
+            © 2026 FlavorFind | Made with ❤️
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
